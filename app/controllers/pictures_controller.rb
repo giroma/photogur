@@ -1,6 +1,8 @@
 class PicturesController < ApplicationController
   def index
     @pictures = Picture.all
+    @most_recent_five = Picture.most_recent_five.order(:id)
+    @month_ago = Picture.created_before(1.month.ago)
   end
   def show
     @picture = Picture.find(params[:id])
@@ -14,8 +16,8 @@ class PicturesController < ApplicationController
     @picture.title = params[:picture][:title]
     @picture.artist = params[:picture][:artist]
     @picture.url = params[:picture][:url]
-    @picture.save
     if @picture.save
+      flash.notice = 'Product successfully updated!'
      # if the picture gets saved, generate a get request to "/pictures" (the index)
       redirect_to "/pictures"
     else
@@ -35,6 +37,7 @@ class PicturesController < ApplicationController
 
 
     if @picture.save
+      flash.notice = 'Product successfully updated!'
       redirect_to "/pictures/#{@picture.id}"
     else
       render :edit

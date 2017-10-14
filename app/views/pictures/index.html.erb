@@ -1,7 +1,22 @@
 <h1>pics bro</h1>
 <%= link_to("New picture", '/pictures/new') %>
 
-<% @pictures.each do |picture| %>
+<% @most_recent_five.each do |picture| %>
+  <p><%= picture.title %>, <%= picture.artist %></p>
+  <%= link_to(image_tag(picture.url), "/pictures/#{picture.id}") %>
+
+<% end %>
+
+
+<h1><%= @month_ago.count %> pictures over a month old</h1>
+<% @month_ago.each do |picture| %>
+  <p><%= picture.title %>, <%= picture.artist %></p>
+  <%= link_to(image_tag(picture.url), "/pictures/#{picture.id}") %>
+
+<% end %>
+
+<h1>2016</h1>
+<% Picture.pictures_created_in_year(2016).each do |picture| %>
   <p><%= picture.title %>, <%= picture.artist %></p>
   <%= link_to(image_tag(picture.url), "/pictures/#{picture.id}") %>
 
