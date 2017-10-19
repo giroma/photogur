@@ -10,8 +10,8 @@ class UsersController < ApplicationController
     @user.password_confirmation = params[:user][:password_confirmation]
 
     if @user.save
-      flash.notice = 'New user created!'
-      redirect_to root_url
+    
+      redirect_to root_url notice: 'New user created!'
     else
       render :new
     end
