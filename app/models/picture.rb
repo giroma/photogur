@@ -1,7 +1,7 @@
 class Picture < ApplicationRecord
 
-  validates :artist, :title, :url, presence: true
-  validates :title, length: {minimum: 3, maximum: 20}
+  validates :artist, :title, :url, presence: {message: "empty fields"}
+  validates :title, length: {minimum: 3, maximum: 20, message: "min 3   max 20"}
   validates :url, uniqueness: true
   validates :url, format: { with: /https?:\/\/[\S]+/, message: "only http"}
 
@@ -17,6 +17,6 @@ class Picture < ApplicationRecord
     Picture.where("created_at < ?", time)
   end
   def self.pictures_created_in_year(year)
-    Picture.where("cast(strftime('%Y', created_at) as int) = ?", year)
+    Picture.where("created_at LIKE ?", "%#{year}%")
   end
 end
