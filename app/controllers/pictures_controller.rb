@@ -18,6 +18,8 @@ class PicturesController < ApplicationController
     @picture.title = params[:picture][:title]
     @picture.artist = params[:picture][:artist]
     @picture.url = params[:picture][:url]
+    p current_user
+    @picture.user_id = current_user.id
     if @picture.save
       flash.notice = 'Product successfully updated!'
      # if the picture gets saved, generate a get request to "/pictures" (the index)
