@@ -1,4 +1,5 @@
 class Picture < ApplicationRecord
+  belongs_to :user
 
   validates :artist, :title, :url, presence: {message: "empty fields"}
   validates :title, length: {minimum: 3, maximum: 20, message: "min 3   max 20"}
