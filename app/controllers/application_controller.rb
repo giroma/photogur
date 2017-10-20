@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def ensure_ownership
     if current_user.id != @picture.user_id
       flash[:alert] = 'Not authorized'
-      redirect_to root_url
+      redirect_to @picture
     end
   end
   def current_user

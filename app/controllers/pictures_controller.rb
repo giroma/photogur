@@ -23,9 +23,9 @@ class PicturesController < ApplicationController
     p current_user
     @picture.user_id = current_user.id
     if @picture.save
-      flash.notice = 'Product successfully updated!'
+      flash.notice = 'Picture created!'
      # if the picture gets saved, generate a get request to "/pictures" (the index)
-      redirect_to "/pictures"
+      redirect_to root_url
     else
      # otherwise render new.html.erb
       render :new
@@ -41,14 +41,14 @@ class PicturesController < ApplicationController
 
 
     if @picture.save
-      flash.notice = 'Product successfully updated!'
-      redirect_to "/pictures/#{@picture.id}"
+      flash.notice = 'Picture successfully updated!'
+      redirect_to @picture
     else
       render :edit
     end
   end
   def destroy
     @picture.destroy
-    redirect_to "/pictures"
+    redirect_to root_url
   end
 end
