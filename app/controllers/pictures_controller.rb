@@ -1,4 +1,6 @@
 class PicturesController < ApplicationController
+  before_action :ensure_logged_in, except: [:index, :show]
+
   def index
     @pictures = Picture.all
     @most_recent_five = Picture.most_recent_five.order(:id)
